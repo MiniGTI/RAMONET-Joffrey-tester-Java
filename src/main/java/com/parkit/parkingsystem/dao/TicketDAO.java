@@ -87,4 +87,26 @@ public class TicketDAO {
         return false;
     }
 
+    public Boolean getNbTicket(String vehicleRegNumber){
+        Connection con = null;
+        int isAvailableDiscount =0;
+        try {
+            con = dataBaseConfig.getConnection();
+            PreparedStatement ps = con.prepareStatement(DBConstants.GET_NB_TICKET);
+            ResultSet numberOfEntries = ps.executeQuery();
+            ps.setString(1, vehicleRegNumber );
+            dataBaseConfig.closeResultSet(numberOfEntries);
+            dataBaseConfig.closePreparedStatement(ps);
+          isAvailableDiscount = Integer.parseInt(String.valueOf(numberOfEntries));
+        } catch (Exception ex){
+            logger.error("Error in the vehicleRegNumber research.", ex);
+        } finally {
+            dataBaseConfig.closeConnection(con);
+        }
+        if(isAvailableDiscount >= 2){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
