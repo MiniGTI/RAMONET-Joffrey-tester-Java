@@ -3,6 +3,9 @@ package com.parkit.parkingsystem.service;
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.model.Ticket;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class FareCalculatorService {
 
 // private static final int MILLISECONDE_TO_HOUR = 2.77778E-7;
@@ -25,7 +28,7 @@ public double duration(Ticket ticket) {
 	double inHour = ticket.getInTime().getTime();
 	double outHour = ticket.getOutTime().getTime();
 	
-	double duration = (outHour - inHour) / MILLISECONDE_TO_HOUR;
+	double duration = BigDecimal.valueOf((outHour - inHour) / MILLISECONDE_TO_HOUR).setScale(3, RoundingMode.HALF_DOWN).doubleValue();
 	
 	if(duration <= 0.5) {
 		return 0.000;

@@ -98,6 +98,7 @@ void parkingLotExitTest() throws SQLException, ClassNotFoundException {
 
 @Test
 void parkingLotExitRecurringUserTest() throws SQLException, ClassNotFoundException {
+	
 	ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
 	
 	// First come
@@ -113,7 +114,6 @@ void parkingLotExitRecurringUserTest() throws SQLException, ClassNotFoundExcepti
 	parkingService.processExitingVehicle();
 	
 	assertEquals(1.42, ticketDAO.getTicket("ABCDEF").getPrice());
+	
 }
-
-
 }
