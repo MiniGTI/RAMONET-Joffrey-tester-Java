@@ -22,6 +22,15 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
-    - name: Launch test sequency
+      run: mvn -B package --file pom.xml -DskipTests=true
+#    - name: Launch test sequency
+#      run: mvn test
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/chekout@v4
+    - name: test the application
       run: mvn test
+    
