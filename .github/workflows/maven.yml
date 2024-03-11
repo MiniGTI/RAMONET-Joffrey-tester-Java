@@ -22,7 +22,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml -DskipTests=true
+      run: ./mvnw -B package --file pom.xml -DskipTests=true
 #    - name: Launch test sequency
 #      run: mvn test
 
@@ -30,7 +30,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
     - name: test the application
-      run: mvn test
+      run: ./mvnw test
     
